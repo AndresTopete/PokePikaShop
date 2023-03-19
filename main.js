@@ -9,7 +9,7 @@ Dos puntos importantes para el proyecto final:
 // Creamos un array vacio para nustro carrito.
 let carrito =[];
 
-//Cargar carrito desde el LocalStorage, sabiendo si hay algo guardado o no.
+// Cargar carrito desde el LocalStorage, sabiendo si hay algo guardado o no.
 if(localStorage.getItem('carrito')){
     carrito = JSON.parse(localStorage.getItem('carrito'));
 }
@@ -17,19 +17,21 @@ if(localStorage.getItem('carrito')){
 // traemos el elemento contenedor productos
 const contenedorProductos = document.getElementById('contenedorProductos');
 
-
+// Se traen los datos del json
 const data = "data.json";
-fetch(data)
-    .then(respuesta => respuesta.json())
-    .then((datos) =>{
-        console.log(datos)
-    })
-    .catch((error) => console.log(error))
+
+async function obtenerData(){
+    const respuesta = await fetch(data);
+    const datos = await respuesta.json(); 
+    mostrarProductos(datos);
+}
+
+obtenerData();
 
 // funcion para mostrar productos
 
 const mostrarProductos = (datos) => {
-    datos.forEach(producto => {
+    datos.forEach( producto=> {
         const card = document.createElement('div');
         card.classList.add('col-xl-3', 'col-md-6', 'col-sm-12');
         card.innerHTML =`
@@ -48,20 +50,20 @@ const mostrarProductos = (datos) => {
         // Agregar producto al carrito
         const boton = document.getElementById(`boton${producto.id}`);
         boton.addEventListener('click', () => {
-            agregarAlCarrito(producto.id);
+            agregarAlCarrito(datos,producto.id);
         })
     })
 }
 
-mostrarProductos();
+;
 
 // funcion para agregar al carrito.
-const agregarAlCarrito = (id) => {
+const agregarAlCarrito = (datos,id) => {
     const productoEnCarrito = carrito.find(producto => producto.id === id);
     if(productoEnCarrito){
         productoEnCarrito.cantidad++;
     } else {
-        const producto = productos.find(producto => producto.id === id);
+        const producto = datos.find(producto => producto.id === id);
         carrito.push(producto);
     }
 
@@ -115,7 +117,7 @@ const mostrarCarrito = () => {
             botonMas(producto.id);
         });
     });
-    calcularTotal();
+    calcularTotal(datos);
 }
 
 // funcion para el boton menos.
@@ -152,7 +154,7 @@ const eliminarDelCarrito = (id) => {
 // Mostrar el total de la compra.
 const total = document.getElementById('total');
 
-const calcularTotal = () => {
+const calcularTotal = (datos) => {
     let totalCompra = 0;
     carrito.forEach(producto =>{
         totalCompra += producto.precio * producto.cantidad;
