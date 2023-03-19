@@ -1,0 +1,34 @@
+/*
+Color Theme Swatches in Hex
+.Aranja-1-hex { color: #565659; }
+.Aranja-2-hex { color: #9794F2; }
+.Aranja-3-hex { color: #B6B9F2; }
+.Aranja-4-hex { color: #8D95A6; }
+.Aranja-5-hex { color: #F2F2F2; }
+*/
+
+
+.imgProductos {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    margin-top: 1rem;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+    margin: 0.5rem;
+    padding: 1rem;
+}
+
+.colorBoton {
+    color: #fafafa;
+    background-color: #9794F2;
+}
+
+.colorBoton:hover {
+    
+    background-color: #565659;
+    color: #fafafa;
+}

@@ -1,0 +1,14 @@
+[
+    {"id":"1", "nombre":"Peluche Pikachu", "tipoProducto":"Peluche", "precio": "400", "img":"css/img/peluche-pikachu.png","Cantidad":"1"},
+    {"id":"2", "nombre":"Peluche Charmander", "tipoProducto":"Peluche", "precio": "350", "img":"css/img/peluche-charmander.png","Cantidad":"1"},
+    {"id":"3", "nombre":"Peluche Meowth", "tipoProducto":"Peluche", "precio":"350", "img":"css/img/peluche-meowth.png", "Cantidad":"1"},
+    {"id":"4", "nombre":"Peluche Dratini", "tipoProducto":"Peluche", "precio":"400", "img":"css/img/peluche-dratini.png", "Cantidad":"1"},
+    {"id":"5", "nombre":"Bolsa Magikarp", "tipoProducto":"Bolsa", "precio":"2000", "img":"css/img/bolsa-magikarp.png", "Cantidad":"1"},
+    {"id":"6", "nombre":"Bolsa Pokeball", "tipoProducto":"Bolsa", "precio":"1000", "img":"css/img/bolsa-pokeball.png", "Cantidad":"1"},
+    {"id":"7", "nombre":"Bolsa Pokeball Corazon", "tipoProducto":"Bolsa", "precio":"1200", "img":"css/img/bolsa-pokeball-corazon.png", "Cantidad":"1"},
+    {"id":"8", "nombre":"Bolsa Psiquico", "tipoProducto":"Bolsa", "precio":"1600", "img":"css/img/bolsa-psiquico.png", "Cantidad":"1"},
+    {"id":"9", "nombre":"Boost Evolutions", "tipoProducto":"TCG", "precio":"120", "img":"css/img/tcg1.png", "Cantidad":"1"},
+    {"id":"10", "nombre":"Boost Sun and Moon", "tipoProducto":"TCG", "precio":"120", "img":"css/img/tcg2.png", "Cantidad":"1"},
+    {"id":"11", "nombre":"Deck Black and White", "tipoProducto":"TCG", "precio":"800", "img":"css/img/tcg3.png", "Cantidad":"1"},
+    {"id":"12", "nombre":"Deck Steam Siege", "tipoProducto":"TCG", "precio":"900", "img":"css/img/tcg4.png", "Cantidad":"1"}
+]
