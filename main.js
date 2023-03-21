@@ -21,7 +21,6 @@ const contenedorProductos = document.getElementById('contenedorProductos');
 const data = "data.json";
 
 // funcion para mostrar productos
-
 const mostrarProductos = () => {
     fetch(data)
     .then(respuesta=>respuesta.json())
@@ -51,7 +50,6 @@ const mostrarProductos = () => {
         })
     })
 }
-
 mostrarProductos();
 
 // funcion para agregar al carrito.
@@ -72,7 +70,6 @@ const agregarAlCarrito = (datos, id) => {
 }
 
 /* Mostrar carrito de compras */
-// Se llama al elemento contenedor carrito y ver carrito. para poder trabajar las funciones.
 const contenedorCarrito = document.getElementById('contenedorCarrito');
 const verCarrito = document.getElementById('verCarrito');
 
@@ -83,6 +80,14 @@ verCarrito.addEventListener('click', ()=>{
 
 const mostrarCarrito = () => {
     contenedorCarrito.innerHTML = '';
+
+    const div1 = document.createElement('div');
+    div1.innerHTML=`
+    <hr>
+    <h2>Carrito de compras</h2>
+    <h3>El total de la compra es de <sapn id="total">${calcularTotal()}</sapn></h3>
+    `
+    contenedorCarrito.appendChild(div1);
     carrito.forEach(producto =>{
         const card = document.createElement('div');
         card.classList.add('col-xl-3', 'col-md-6', 'col-sm-12');
@@ -96,7 +101,7 @@ const mostrarCarrito = () => {
                             </div>
                             <div class = 'btn-group' role = 'group'>
                             <button class = 'btn colorBoton' id = 'menos${producto.id}'>-</button>
-                            <p>${producto.cantidad}</p>
+                            <p> ${producto.cantidad} </p>
                             <button class = 'btn colorBoton' id = 'mas${producto.id}'>+</button>
                             <div>
                         </div>
@@ -114,7 +119,6 @@ const mostrarCarrito = () => {
             botonMas(producto.id);
         });
     });
-    calcularTotal();
 }
 
 // funcion para el boton menos.
@@ -156,7 +160,7 @@ const calcularTotal = () => {
     carrito.forEach(producto =>{
         totalCompra += producto.precio * producto.cantidad;
     })
-    total.innerHTML = `Total: $${totalCompra}`;
+    return totalCompra;
 }
 
 // Vaciar todo el carrto.
