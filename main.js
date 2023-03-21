@@ -20,18 +20,13 @@ const contenedorProductos = document.getElementById('contenedorProductos');
 // Se traen los datos del json
 const data = "data.json";
 
-async function obtenerData(){
-    const respuesta = await fetch(data);
-    const datos = await respuesta.json(); 
-    mostrarProductos(datos);
-}
-
-obtenerData();
-
 // funcion para mostrar productos
 
-const mostrarProductos = (datos) => {
-    datos.forEach( producto=> {
+const mostrarProductos = () => {
+    fetch(data)
+    .then(respuesta=>respuesta.json())
+    .then (datos=>{
+        datos.forEach( producto=> {
         const card = document.createElement('div');
         card.classList.add('col-xl-3', 'col-md-6', 'col-sm-12');
         card.innerHTML =`
@@ -50,15 +45,17 @@ const mostrarProductos = (datos) => {
         // Agregar producto al carrito
         const boton = document.getElementById(`boton${producto.id}`);
         boton.addEventListener('click', () => {
-            agregarAlCarrito(datos,producto.id);
+            agregarAlCarrito(datos, producto.id);
+        })
+
         })
     })
 }
 
-;
+mostrarProductos();
 
 // funcion para agregar al carrito.
-const agregarAlCarrito = (datos,id) => {
+const agregarAlCarrito = (datos, id) => {
     const productoEnCarrito = carrito.find(producto => producto.id === id);
     if(productoEnCarrito){
         productoEnCarrito.cantidad++;
@@ -117,7 +114,7 @@ const mostrarCarrito = () => {
             botonMas(producto.id);
         });
     });
-    calcularTotal(datos);
+    calcularTotal();
 }
 
 // funcion para el boton menos.
@@ -154,7 +151,7 @@ const eliminarDelCarrito = (id) => {
 // Mostrar el total de la compra.
 const total = document.getElementById('total');
 
-const calcularTotal = (datos) => {
+const calcularTotal = () => {
     let totalCompra = 0;
     carrito.forEach(producto =>{
         totalCompra += producto.precio * producto.cantidad;
