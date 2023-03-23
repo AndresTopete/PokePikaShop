@@ -106,7 +106,6 @@ const mostrarCarrito = () => {
                             <div>
                         </div>
                         `
-        contenedorCarrito.appendChild(card);
 
         //Agregamos acciones a los botones de + y - .
         const menos = document.getElementById(`menos${producto.id}`);
