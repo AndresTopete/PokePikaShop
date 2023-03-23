@@ -70,24 +70,19 @@ const agregarAlCarrito = (datos, id) => {
 }
 
 /* Mostrar carrito de compras */
-const contenedorCarrito = document.getElementById('contenedorCarrito');
-const verCarrito = document.getElementById('verCarrito');
+const contenedorCompra = document.getElementById('contenedorCompra');
+const contenedorfinalizar = document.getElementById('contenedorfinalizar');
+
 
 // Le añadimos un evento al boton ver carrito
+const verCarrito = document.getElementById('verCarrito');
 verCarrito.addEventListener('click', ()=>{
     mostrarCarrito();
 });
 
-const mostrarCarrito = () => {
-    contenedorCarrito.innerHTML = '';
-
-    const div1 = document.createElement('div');
-    div1.innerHTML=`
-    <hr>
-    <h2>Carrito de compras</h2>
-    <h3>El total de la compra es de <sapn id="total">${calcularTotal()}</sapn></h3>
-    `
-    contenedorCarrito.appendChild(div1);
+const contenedorItem = document.getElementById('contenedorItem');
+const mostrarItemCarrito = () => {
+    contenedorItem.innerHTML = '';
     carrito.forEach(producto =>{
         const card = document.createElement('div');
         card.classList.add('col-xl-3', 'col-md-6', 'col-sm-12');
@@ -97,7 +92,7 @@ const mostrarCarrito = () => {
                             <div>
                                 <h5>${producto.nombre}</h5>
                                 <p>${producto.tipoProducto}</p>
-                                <p>${producto.precio}</p>
+                                <p>$${producto.precio}.00</p>
                             </div>
                             <div class = 'btn-group' role = 'group'>
                             <button class = 'btn colorBoton' id = 'menos${producto.id}'>-</button>
@@ -106,7 +101,7 @@ const mostrarCarrito = () => {
                             <div>
                         </div>
                         `
-
+        contenedorItem.appendChild(card);
         //Agregamos acciones a los botones de + y - .
         const menos = document.getElementById(`menos${producto.id}`);
         menos.addEventListener('click', () => {
@@ -118,6 +113,23 @@ const mostrarCarrito = () => {
             botonMas(producto.id);
         });
     });
+}
+
+const mostrarTotal = () => {
+    contenedorCompra.innerHTML = '';
+    const div2 = document.createElement('div');
+    div2.innerHTML=`
+    <hr>
+    <h2>Carrito de compras</h2>
+    <h3>El total de la compra es de <sapn id="total">$${calcularTotal()}.00</sapn></h3>
+    `
+    contenedorCompra.appendChild(div2);
+}
+
+const mostrarCarrito = () =>{
+    mostrarTotal();
+    mostrarItemCarrito();
+    finalizarCompra();
 }
 
 // funcion para el boton menos.
@@ -177,4 +189,50 @@ const eliminarTodoElCarrito = () => {
     localStorage.clear();
 }
 
+// finalizar la compra.
+const finalizarCompra = () =>{
+    contenedorfinalizar.innerHTML = '';
+
+    const div1 = document.createElement('div');
+    div1.innerHTML=`
+    <button class = 'btn colorBoton' id = 'finalizarCompra'>finalizar Compra</button>
+    `
+    contenedorfinalizar.appendChild(div1);
+
+    const botonfin = document.getElementById('finalizarCompra');
+
+    botonfin.addEventListener('click', () => {
+    if(carrito.length===0){
+        Toastify({
+            text: "Tu carrito esta vacio",
+            duration: 3000,
+            newWindow: true,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "center", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+              background: "color: #8D95A6",
+            },
+            onClick: function(){} // Callback after click
+          }).showToast();
+    }else{
+        Toastify({
+            text: "Tu compra se realizo con exito",
+            duration: 3000,
+            newWindow: true,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "center", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+              background: "color: #8D95A6",
+            },
+            onClick: function(){} // Callback after click
+          }).showToast();
+    
+        eliminarTodoElCarrito();
+    }
+    })
+}
 
